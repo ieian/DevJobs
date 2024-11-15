@@ -37,12 +37,14 @@ exports.validarRegistro = [
     }
 ];
 
-exports.crearUsuario = async (req, res, next) => {
-    const usuario = new Usuarios(req.body);
-
-    const nuevoUsuario = await usuario.save();
-
-    if(!nuevoUsuario) return next();
-
-    res.redirect('/iniciar-sesion');
+exports.crearUsuario = async (req,res) => {
+    const usuario = await new Usuarios(req.body);
+ 
+    try{
+        await usuario.save();
+        res.redirect('/iniciar-sesion');
+    }catch(error){
+        req.flash('error', error);
+        res.redirect('/crear-cuenta');
+    }
 }

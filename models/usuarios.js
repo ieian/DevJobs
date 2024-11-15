@@ -30,6 +30,14 @@ usuariosSchema.pre('save', async function(next) {
     const hash = await bcrypt.hash(this.password, 10);
     this.password = hash;
     next();
-})
+});
+
+usuariosSchema.post('save', function(error, doc, next) {
+    if(error.name === 'MongoServerError' && error.code === 11000){
+        next('Ese hay un usuario registrado con ese correo');
+    } else {
+        next(error);
+    }
+});
 
 module.exports = mongoose.model('Usuarios', usuariosSchema);
