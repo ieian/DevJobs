@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 
 const store = MongoStore.create({
     mongoUrl: process.env.DATABASE,
@@ -41,6 +42,13 @@ app.use(session({
     saveUninitialized: false,
     store: store
 }))
+
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.mensajes = req.flash();
+    next();
+});
 
 app.use('/', router());
 
