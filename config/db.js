@@ -7,4 +7,5 @@ mongoose.connection.on('error',error => {
     console.log(error);
 })
 
+require('../models/usuarios');
 require('../models/vacantes');
