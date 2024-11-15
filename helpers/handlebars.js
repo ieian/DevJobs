@@ -9,10 +9,15 @@ module.exports = {
         let html = '';
         skills.forEach(skill => {
             html += `
-                <li>${skill}</li>
+                <li ${seleccionadas.includes(skill) ? 'class="activo"' : ''}>${skill}</li>
             `;
         });
 
         return opciones.fn().html = html;
+    },
+    tipoContrato: (seleccionadado, opciones) => {
+        return opciones.fn(this).replace(
+            new RegExp(` value="${seleccionadado}"`), '$& selected="selected"'
+        )
     }
 }
