@@ -54,3 +54,10 @@ exports.formIniciarSesion = (req,res) =>  {
         nombrePagina: 'Iniciar sesion en devJobs',
     });
 }
+
+exports.formEditarPerfil = (req, res) => {
+    res.render('editar-perfil', {
+        nombrePagina: 'Edita tu perfil en devJobs',
+        usuario: req.user.toObject()
+    });
+}

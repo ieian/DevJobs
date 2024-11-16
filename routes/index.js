@@ -24,5 +24,7 @@ module.exports = () => {
 
     router.get('/administracion', authController.verificarUsuario, authController.mostrarPanel);
 
+    router.get('/editar-perfil', authController.verificarUsuario ,usuariosController.formEditarPerfil)
+
     return router;
 }
