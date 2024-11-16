@@ -15,12 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         skillsSeleccionados();
     }
-
-    const vacantesListado = document.querySelector('.panel-administracion');
-
-    if(vacantesListado) {
-        vacantesListado.addEventListener('click', accionesListado);
-    }
 })
 
 const skills = new Set();
@@ -59,14 +53,4 @@ const limpiarAlertas =() => {
             clearInterval(interval);
         }
     }, 2000);
-}
-
-const accionesListado = e => {
-    e.preventDefault();
-
-    if(e.target.dataset.eliminar) {
-        
-    } else {
-        window.location.href = e.target.href;
-    }
 }
