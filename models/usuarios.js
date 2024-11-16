@@ -40,8 +40,7 @@ usuariosSchema.post('save', function(error, doc, next) {
     }
 });
 
-usuariosSchema.method = {
-    compararPassword: function(password) {
+usuariosSchema.methods = { compararPassword: function(password) {
         return bcrypt.compareSync(password, this.password);
     }
 }
