@@ -25,6 +25,7 @@ exports.mostrarPanel = async (req, res) => {
         tagline : 'Crea y administra tus vacantes desde aqui',
         cerrarSesion: true,
         nombre : req.user.nombre,
+        imagen : req.user.imagen,
         vacantes
     })
 };

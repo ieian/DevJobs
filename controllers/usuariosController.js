@@ -105,6 +105,7 @@ exports.formEditarPerfil = (req, res) => {
         usuario: req.user.toObject(),
         cerrarSesion: true,
         nombre : req.user.nombre,
+        imagen : req.user.imagen
     });
 }
 
@@ -144,6 +145,7 @@ exports.validarPerfil = async (req, res, next) => {
             usuario: req.user.toObject(),
             cerrarSesion: true,
             nombre: req.user.nombre,
+            imagen : req.user.imagen,
             mensajes: req.flash()
         })
         return;
