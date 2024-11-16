@@ -102,7 +102,7 @@ exports.SubirCV = (req, res, next) => {
         if(error) {
             if(error instanceof multer.MulterError) {
                 if(error.code === 'LIMIT_FILE_SIZE') {
-                    req.flash('error', 'El archivo es muy grande: Maximo 150kb')
+                    req.flash('error', 'El archivo es muy grande: Maximo 150kb');
                 } else {
                     req.flash('error', error.message);
                 }
@@ -138,3 +138,21 @@ const configuracionMulter = {
 }
 
 const upload = multer(configuracionMulter).single('cv');
+
+exports.contactar = async (req, res, next) => {
+    const vacante = await Vacante.findOne({ url : req.params.url});
+
+    if(!vacante) return next();
+
+    const nuevoCandidato = {
+        nombre : req.params.nombre,
+        email : req.params.email,
+        cv : req.file.filename
+    }
+
+    vacante.candidatos.push(nuevoCandidato);
+    await vacante.save();
+
+    req.flash('correrto', 'Se envio tu CV Correctamente');
+    res.redirect('/');
+}
