@@ -22,6 +22,8 @@ module.exports = () => {
     router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
+    router.get('/cerrar-sesion', authController.verificarUsuario, authController.cerrarSesion);
+
     router.get('/administracion', authController.verificarUsuario, authController.mostrarPanel);
 
     router.get('/editar-perfil', authController.verificarUsuario ,usuariosController.formEditarPerfil);
