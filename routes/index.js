@@ -12,6 +12,7 @@ module.exports = () => {
     router.post('/vacantes/nueva', authController.verificarUsuario, vacantesController.validarVacante, vacantesController.agregarVacante);
 
     router.get('/vacantes/:url', vacantesController.mostrarVacante);
+    router.post('/vacantes/:url', vacantesController.SubirCV, vacantesController.contactar);
 
     router.get('/vacantes/editar/:url', authController.verificarUsuario, vacantesController.formEditarVacante);
     router.post('/vacantes/editar/:url', authController.verificarUsuario, vacantesController.validarVacante, vacantesController.editarVacante);
