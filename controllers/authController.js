@@ -7,9 +7,17 @@ exports.autenticarUsuario = passport.authenticate('local',{
     badRequestMessage : 'Ambos campos son obligatorios'
 });
 
+exports.verificarUsuario = (req, res, next) => {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    
+    res.redirect('/iniciar-sesion');
+};
+
 exports.mostrarPanel = (req, res) => {
     res.render('administracion', {
         nombrePagina : 'Panel de Administracion',
         tagline : 'Crea y administra tus vacantes desde aqui'
     })
-}
+};
