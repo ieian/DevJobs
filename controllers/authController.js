@@ -92,3 +92,26 @@ exports.reestablecerPassword = async (req, res) => {
         nombrePagina : 'Nuevo Password'
     })
 }
+
+exports.guardarPassword = async (req, res) => {
+    const usuario = await Usuarios.findOne({
+        token : req.params.token,
+        expira : {
+            $gt : Date.now()
+        }
+    });
+    
+    if(!usuario) {
+        req.flash('error', 'El formulario ya no es valido');
+        return res.redirect('/reestablecer-password');
+    }
+
+    usuario.password = req.body.password;
+    usuario.token = undefined;
+    usuario.expira = undefined;
+
+    await usuario.save();
+
+    req.flash('correcto', 'Password mofidicado correctamente');
+    res.redirect('/iniciar-sesion');
+}
