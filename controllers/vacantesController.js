@@ -145,20 +145,20 @@ exports.contactar = async (req, res, next) => {
     if(!vacante) return next();
 
     const nuevoCandidato = {
-        nombre : req.params.nombre,
-        email : req.params.email,
+        nombre: req.body.nombre,
+        email: req.body.email,
         cv : req.file.filename
     }
 
     vacante.candidatos.push(nuevoCandidato);
     await vacante.save();
 
-    req.flash('correrto', 'Se envio tu CV Correctamente');
+    req.flash('correcto', 'Se envió tu Curriculum Correctamente');
     res.redirect('/');
 }
 
 exports.mostrarCandidatos = async (req, res, next) => {
-    const vacante = await Vacante.findById(req.params.id);
+    const vacante = await Vacante.findById(req.params.id).lean();
 
     if(vacante.autor != req.user._id.toString()){
         return next();
