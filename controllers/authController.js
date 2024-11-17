@@ -39,3 +39,10 @@ exports.cerrarSesion = (req, res, next) => {
         return res.redirect('/iniciar-sesion')
     });
 };
+
+exports.formReestablecerPassword = (req, res) => {
+    res.render('reestablecer-password', {
+        nombrePagina : 'Reestablece tu Password',
+        tagline : 'Si ya tienes una cuenta con nosotros pero olvidaste tu password, coloca tu email'
+    })
+};
