@@ -1,5 +1,7 @@
 const emailConfig = require('../config/email');
 const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
+const util = require('util');
 
 let transport = nodemailer.createTransport({
     host : emailConfig.host,
@@ -10,6 +12,18 @@ let transport = nodemailer.createTransport({
     }
 });
 
+const handlebarOptions = {
+    viewEngine: {
+      extName: '.handlebars',
+      partialsDir: __dirname + '/../views/emails',
+      layoutsDir: __dirname + '/../views/emails',
+      defaultLayout: 'reset.handlebars',
+    },
+    viewPath: __dirname + '/../views/emails',  
+    extName: '.handlebars',  
+  };
+  
+  transport.use('compile', hbs(handlebarOptions));
 
 exports.enviar = async (opciones) => {
     const opcionesEmail = {
