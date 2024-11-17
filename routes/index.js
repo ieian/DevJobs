@@ -32,5 +32,7 @@ module.exports = () => {
     //router.post('/editar-perfil', authController.verificarUsuario, usuariosController.validarPerfil, usuariosController.editarPerfil);                                                            
     router.post('/editar-perfil', authController.verificarUsuario, usuariosController.subirImagen, usuariosController.editarPerfil);
 
+    router.get('/candidatos/:id', authController.verificarUsuario, vacantesController.mostrarCandidatos);
+
     return router;
 }
