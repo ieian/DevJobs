@@ -174,3 +174,18 @@ exports.mostrarCandidatos = async (req, res, next) => {
         candidatos : vacante.candidatos 
     })
 }
+
+exports.buscarVacantes = async (req, res) => {
+    const vacantes = await Vacante.find({
+        $text : {
+            $search : req.body.q
+        }
+    }).lean();
+
+    // mostrar las vacantes
+    res.render('home', {
+        nombrePagina : `Resultados de la búsqueda : ${req.body.q}`, 
+        barra: true,
+        vacantes 
+    })
+}
